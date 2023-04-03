@@ -1,0 +1,77 @@
+#include <stdio.h>
+#include<stdlib.h>
+int main(void) {
+char name[10];
+int age,n;
+float height,weight,bmi;
+FILE *fp;
+fp=fopen("bmi.txt","w");
+if(fp==NULL)
+{
+printf("Error in opening file");
+exit(0);
+}
+printf("\nEnter your name:");
+scanf("%s",name);
+printf("\nEnter your age:");
+scanf("%d",&age);
+printf("\n1.Enter your height and weight in metrics units\n2.Enter your height and weight in
+USC units");
+
+printf("\nEnter your choice:");
+scanf("%d",&n);
+switch(n)
+{
+case 1:printf("\nEnter your height in cm:");
+scanf("%f",&height);
+printf("\nEnter your weight in kg:");
+scanf("%f",&weight);
+bmi=weight/(height*height);
+fprintf(fp,"%s %d %f %f %f",name,age,height,weight,bmi);
+fclose(fp);
+break;
+case 2:printf("\nEnter your height in inches:");
+scanf("%f",&height);
+printf("\nEnter your weight in pounds:");
+scanf("%f",&weight);
+bmi=703*(weight/(height*height));
+fprintf(fp,"%s %d %f %f %f",name,age,height,weight,bmi);
+break;
+}
+printf("\n Your BMI is %f",bmi);
+if(bmi<16)
+{
+printf("\nCategory:Severe Thinness");
+}
+
+else if(bmi>=16 && bmi<=17)
+{
+printf("\nCategory:Moderate Thinness");
+}
+else if(bmi>=17 && bmi<=18.5)
+{
+printf("\nCategory:Mild Thinness");
+}
+else if(bmi>=18.5 || bmi<=25)
+{
+printf("\nCategory:Normal");
+}
+else if(bmi>=25 || bmi<=30)
+{
+printf("\nCategory:Overweight");
+}
+else if(bmi>=30 || bmi<=35)
+{
+printf("\nCategory:Obese Class I");
+}
+else if(bmi>=35 || bmi<=40)
+{
+printf("\nCategory:Obese Class II");
+}
+else if(bmi>40)
+
+{
+printf("\nCategory:Obese Class III");
+}
+return 0;
+}
